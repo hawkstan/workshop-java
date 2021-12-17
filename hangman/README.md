@@ -10,7 +10,7 @@
   <h3>Hangman Java Workshop</h3>
 
   <p>
-    A little game of flashcards to memorise more easily your hieroglyphs
+    A little game to discover a bit of java language
     <br />
     <br />
   </p>
