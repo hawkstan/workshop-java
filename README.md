@@ -29,6 +29,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#issues">Issues</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -57,6 +58,17 @@ Really basic, certainly not the best, it was done as final project after 2 weeks
 ## Usage
 
 Hang people.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- ISSUES -->
+## Issues
+
+- Doesn't work if user input is a char who is null
+- Doesn't check if error has already been made, reentering a false letter will result in a new error
+- Will force you to play if you don't say "n" when prompted
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
