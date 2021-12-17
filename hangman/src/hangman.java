@@ -166,9 +166,9 @@ public class hangman {
             wordTruth=random.toCharArray();
             wordHidden=new char[wordTruth.length];
             for(i=0; i<wordHidden.length; i++) {
-                if(Character.isWhitespace(wordTruth[i]) | Character.isDigit(wordTruth[i])){ //leave not letters as themselves
-                    wordHidden[i]=wordTruth[i];
-                } else wordHidden[i]='-';
+                if(Character.isLetter(wordTruth[i])){ //leave not letters as themselves
+                    wordHidden[i]='-';
+                } else wordHidden[i]=wordTruth[i];
             }
             defeat=hanged(error);
             System.out.println(wordHidden);
@@ -231,7 +231,6 @@ public class hangman {
                     System.out.println(letter+" was already found !");
                     triedLetter=false;
                 }
-                System.out.println(wordHidden);
                 defeat=hanged(error);
                 if(error>0) {
                     System.out.print("Already tried : ");
@@ -242,6 +241,7 @@ public class hangman {
                         System.out.println(badLetters[ix]);
                     }
                 }
+                System.out.println(wordHidden);
             }
             //final results
             if(defeat==true){

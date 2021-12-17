@@ -40,7 +40,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Old little code I had and decided to pimp a bit and present for a workshop.  
+Little code I had and decided to pimp a bit and present for a workshop.  
 Really basic, certainly not the best, it was done as final project after 2 weeks of discovering java.  
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -66,9 +66,9 @@ Hang people.
 <!-- ISSUES -->
 ## Issues
 
-- Doesn't work if user input is a char who is null
-- Doesn't check if error has already been made, reentering a false letter will result in a new error
-- Will force you to play if you don't say "n" when prompted
+- Doesn't work if user input is null
+- Doesn't check if error has already been made, reentering a false letter will result in a new error being counted
+- Will force you to play if you say anything oher than "n" when prompted
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
