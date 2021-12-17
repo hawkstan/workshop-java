@@ -5,7 +5,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <img src="https://images.vexels.com/media/users/3/203806/isolated/preview/0abe260aa9524745280596ae04780869-egyptian-symbol-eye-of-horus-hand-drawn-by-vexels.png" alt="eye of Horus" height="150px">
+  <img src="http://vignette4.wikia.nocookie.net/austinally/images/c/ce/Hangman_game.png/revision/latest?cb=20140725033826" alt="hangman style" height="200px">
 
   <h3>Hangman Java Workshop</h3>
 
