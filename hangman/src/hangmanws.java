@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class hangman {
+public class hangmanws {
     public static boolean hanged(int error){ //little hangman drawing
         boolean defeat=false;
         switch (error) {
@@ -106,66 +106,47 @@ public class hangman {
         }
         return defeat;
     }
-    public static void main(String[] args){
-        //need to declare ALL variables used
-        int error;
-        int i;
-        int ii;
-        char letter;
-        char letterMaj;
+    public static void main(String[] args) {
         char[] wordHidden;
         char[] wordTruth;
         String word[];
-        word = new String [15];
-		String random = "";
+        word = new String [5];
+        String random = "";
         Random r=new Random();
-        boolean badLetter = false;
-        boolean triedLetter = false;
-        char[] badLetters;
+        int i;
+        int ii;
+        int error;
         int x;
-        int ix = 0;
+        int ix;
+        char[] badLetters;
         badLetters = new char [6];
         boolean defeat = false;
         boolean victory = false;
         String gameReset = "";
         boolean game = true;
+        char letter;
+        char letterMaj;
+        boolean triedLetter = false;
+        boolean badLetter = false;
 
-        //introduction
-        System.out.println("Salem, 1800");
-        System.out.println("You have been found guilty of witchcraft and will be hung");
-        System.out.println("However, the executionner is bored, and if you manage to guess his word, he will let you go");
-        System.out.println("Do you want to play ? (y/n)");
+        word[0]="furet";
+        word[1]="pomme de terre";
+        word[2]="ornithologue";
+        word[3]="Neon Genesis Evangelion";
+        word[4]="Winou le magnifique";
+
+        System.out.println("do you wanna play ? (y/n)");
         gameReset=(new Scanner(System.in)).nextLine();
-        if(gameReset.equalsIgnoreCase("n")) { 
-            game=false;
+        if (gameReset.equalsIgnoreCase("n")) {
+            game = false;
         }
-        //System.out.println("Just kidding, you don't have a choice");
         while(game==true){
-            //resetting counters
-            x = 0;
-            error = 0;
-            //array of words to guess
-            word[0]="furet";
-            word[1]="pomme de terre";
-            word[2]="ornithologue";
-            word[3]="Neon Genesis Evangelion";
-            word[4]="Winou le magnifique";
-            word[5]="Fullmetal Alchemist";
-            word[6]="Sauron";
-            word[7]="constellation";
-            word[8]="le Seigneur des Anneaux";
-            word[9]="pistache";
-            word[10]="SEPHIROTH";
-            word[11]="chute de Constantinople";
-            word[12]="Sir Winston the 1st of his Name His Majesty Emperor and King of the Seven Gardens Protector of the Realm and the Winouide Dynasty Conqueror of Hearts and Cutest Cutie Pie";
-            word[13]="Ancalagon le noir";
-            word[14]="anticonstitutionnellement";
-
-            //selecting random word from array and hiding it
+            error=0;
+            x=0;
             random=word[r.nextInt(word.length)];
             wordTruth=random.toCharArray();
-            wordHidden=new char[wordTruth.length];
-            for(i=0; i<wordHidden.length; i++) {
+            wordHidden= new char[wordTruth.length];
+            for(i=0; i<wordHidden.length; i++){
                 if(Character.isWhitespace(wordTruth[i]) | Character.isDigit(wordTruth[i])){ //leave not letters as themselves
                     wordHidden[i]=wordTruth[i];
                 } else wordHidden[i]='-';
@@ -173,67 +154,55 @@ public class hangman {
             defeat=hanged(error);
             System.out.println(wordHidden);
 
-            //actual game loop
-            while(defeat==false && victory==false) { //lazy &&, stop checking if one condition is not ok
+            while (defeat==false && victory==false) {
                 System.out.println("Enter a letter :");
                 letter=(new Scanner(System.in)).nextLine().charAt(0);
-                if(!(Character.isLetter(letter))) { //if user input is invalid, ask to try again - need to be able to recognize empty char
+                if(!(Character.isLetter(letter))){
                     while (!(Character.isLetter(letter))) {
-                        System.out.println("This is not a letter. Please enter a letter :");
+                        System.out.println("This is not a letter, please try again");
                         letter=(new Scanner(System.in)).nextLine().charAt(0);
                     }
                 }
-                letterMaj=Character.toUpperCase(letter); //will permit to check for uppercase
-                for(i=0; i<wordHidden.length; i++) { //check every letter to see if user got one correct
-                    if(letter==wordHidden[i] | letterMaj==wordHidden[i]) { //check if the letter was already guessed
-                        triedLetter = true;
+                letterMaj=Character.toUpperCase(letter);
+
+                for(i=0; i<wordHidden.length; i++){
+                    if (letter==wordHidden[i] | letterMaj==wordHidden[i]) {
+                        triedLetter=true;
                         badLetter=false;
                     }
-                    if((letter==wordTruth[i] | letterMaj==wordTruth[i]) && triedLetter==false) { 
-                        System.out.println("Nice !");
-                        for(ii=0; ii<wordTruth.length; ii++) { //replace every letter, without the congratulation each time (for double letters)
+                    if ((letter==wordTruth[i] | letterMaj==wordTruth[i]) && triedLetter==false) {
+                        for(ii=0; ii<wordTruth.length; ii++){
                             victory = true;
                             if(letter==wordTruth[ii] | letterMaj==wordTruth[ii]) {
                                 wordHidden[ii]=wordTruth[ii];
                                 wordTruth[ii]='/'; // erase letter from the word to guess to avoid eternal loop
                             }
                         }
-                        for(i=0; i<wordHidden.length; i++) { //check if there's still letters to guess
-                            if(wordHidden[i]=='-') {
-                                victory = false; // with victory true in precedent loop, avoid victory on final letter
+                        for(i=0; i<wordHidden.length; i++){
+                            if (wordHidden[i]=='-') {
+                                victory=false;
                             }
                         }
                         badLetter=false;
-                    } else if(triedLetter==false){
-                        badLetter = true; //this was supposed to check the array and not count error already made
-                        //while(triedLetter!=true | ix<badLetters.length){
-                        //    for(ix=0; ix<badLetters.length; ix++){
-                        //        if(letter==badLetters[ix] | letterMaj==badLetters[ix]);{
-                        //            triedLetter = true;
-                        //            badLetter = false;
-                        //        }
-                        //    }
-                        //}
+                    } else if (triedLetter==false) {
+                        badLetter=true;
                     }
                 }
-                if(badLetter==true) { //print error message
-                    System.out.println("Awww, too bad !");
-                    System.out.println(letter+" is not in the word to guess"); //change this, have array of bad letters, display it under the hangman
-                    System.out.println("You feel the rope tightening");
+
+                if (badLetter==true) {
+                    System.out.println("awww, too bad ! "+letter+" doesn't exist in this word !");
                     error++;
-                    if(x<6){
+                    if (x<6) {
                         badLetters[x] = letter;
                         x++;
                     }
-                    badLetter = false;
+                    badLetter=false;
                 }
-                if(triedLetter==true) {
-                    System.out.println(letter+" was already found !");
+                if (triedLetter==true) {
+                    System.out.println(letter+" has already been found !");
                     triedLetter=false;
                 }
-                System.out.println(wordHidden);
-                defeat=hanged(error);
-                if(error>0) {
+                if (error>0) {
                     System.out.print("Already tried : ");
                     for(ix=0; ix<x-1; ix++){
                         System.out.print(badLetters[ix]+", ");
@@ -242,26 +211,26 @@ public class hangman {
                         System.out.println(badLetters[ix]);
                     }
                 }
+
+                defeat=hanged(error);
+                System.out.println(wordHidden);
             }
-            //final results
-            if(defeat==true){
-                System.out.println("The crowd cheers as the ground fall beneath your feet");
-                System.out.println("As you fall, you hear the executionner say 'too bad friend, my word was "+random+".");
-                System.out.println("You have lost the game, and your life");
+            if (defeat==true) {
+                System.out.println("aww, too bad, you lost !");
+                System.out.println("the secret word was "+random);
+                defeat=false;
             }
-            if(victory==true){
-                System.out.println("You found "+random+", the secret word !");
-                System.out.println("The crowd boos as you exit the platform.");
-                System.out.println("But you managed to save yourself, and the future is bright");
+            if (victory==true) {
+                System.out.println("congratulations, you guessed the word !");
+                victory=false;
             }
-            System.out.println("Do you want to try again ? (y/n)");
+            System.out.println("do you wanna play again ? (y/n)");
             gameReset=(new Scanner(System.in)).nextLine();
-            if(gameReset.equalsIgnoreCase("n")) { 
-                game=false;
+            if (gameReset.equalsIgnoreCase("n")) {
+                game = false;
             }
-            defeat=false;
-            victory=false;
         }
-        System.out.println("Thanks for playing ! Hope you had fun !");
+        System.out.println("thanks for playing !");
+
     }
 }
